@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "followUps": [
+        {
+            "id": "1.1",
+            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+        },
+        {
+            "id": "1.2",
+            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+        }
+    ]
+  },
+  {
+    "id": "2",
+    "quest": "Take a photo of the weirdest thing that you can see now",
+    "followUps": [
+        {
+            "id": "2.1",
+            "quest": "Physically draw that photo. Don't worry if it's ugly, it is already the weirdest thing you can see anyways"
+        },
+        {
+            "id": "2.2",
+            "quest": "Send your drawing to someone you trust with zero context"
+        }
+    ]
+  }
+]
