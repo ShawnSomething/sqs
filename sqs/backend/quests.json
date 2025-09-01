@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
     "followUps": [
         {
             "id": 1.1,
@@ -27,129 +27,115 @@
         }
     ]
   },
-    {
+  {
     "id": 3,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Get pocket sized snacks that you can easily hide",
     "followUps": [
         {
             "id": 3.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Go to the cinema and watch the next showing, regardless of the movie"
         },
         {
             "id": 3.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Try to get in with your snacks without getting caught"
         }
     ]
   },
-    {
+  {
     "id": 4,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Go on Google Maps to find a restaurant that you have never been to before. Don't think, just head there now",
     "followUps": [
         {
             "id": 4.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Order a drink and something to eat"
         },
         {
             "id": 4.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Let the staff know that this is your first time leaving your cave in 15 years"
         }
     ]
   },
-    {
+  {
     "id": 5,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Choose your favourite song on your preferred streaming service. Sit there and listen to it with your eyes closed",
     "followUps": [
         {
             "id": 5.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Go to the next song in the playlist, now get up and dance to it. No skipping, the next song has to be it."
         },
         {
             "id": 5.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Let your streaming service of choice choose the next song for you, listen to it fully with your eyes closed."
         }
     ]
   },
-    {
+  {
     "id": 6,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Buy a model kit, plane, ship, car, robot, anything",
     "followUps": [
         {
             "id": 6.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Put on a long podcast and make yourself a nice drink"
         },
         {
             "id": 6.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Take your time to build and finish it. Embrace the nerd"
         }
     ]
   },
-    {
+  {
     "id": 7,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
-    "followUps": [
-        {
-            "id": 1.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
-        },
-        {
-            "id": 1.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
-        }
-    ]
-  },
-    {
-    "id": 1,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Text someone you care about. Or if you want more of a challenge, text someone at the bottom of your personal messaging app",
     "followUps": [
         {
             "id": 7.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Call someone you care about. Or if you want more of a challenge, call someone at the bottom of your personal messaging app"
         },
         {
             "id": 7.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Send them your favourite movie/tv show"
         }
     ]
   },
-    {
+  {
     "id": 8,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Take a trip to your favourite store.",
     "followUps": [
         {
             "id": 8.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Take your time to browse through every section, find something that you really really like and want to buy."
         },
         {
             "id": 8.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Don't buy it. Put it back!"
         }
     ]
   },
-    {
+  {
     "id": 9,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Remember a meal that you had when you were younger, your favourite homemade meal.",
     "followUps": [
         {
             "id": 9.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Get the ingredients and make it"
         },
         {
             "id": 9.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Show it to someone you know that remembers or might like this meal"
         }
     ]
   },
-    {
+  {
     "id": 10,
-    "quest": "⚔️ Brave the perilous grocery store to acquire an ice cream flavour you have never had.",
+    "quest": "Take a nap. Yes, go take a nap. Just lay there if you can't sleep",
     "followUps": [
         {
             "id": 10.1,
-            "quest": "Build the most delicious looking bowl of ice cream you have ever had in your life."
+            "quest": "Does that feel good? Now, go to your fridge to grab something to eat. It can be something small."
         },
         {
             "id": 10.2,
-            "quest": "Sprawl out on your bed/sofa, eat the ice cream while calling a friend to cry. Like one of those old 1970s teenage girls going through a breakup."
+            "quest": "Bring the food or drink back to bed and enjoy it there. You lazy pig."
         }
     ]
   }
