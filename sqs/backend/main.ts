@@ -5,6 +5,8 @@ import path from "path";
 const questsPath = path.join(__dirname, "quests.json"); 
 const quests = JSON.parse(fs.readFileSync(questsPath, "utf-8"));
 
+let selectedQuest: { id: number; quest: string; followUps: any[] } | null = null;
+
 const start = () => {
     console.log("Hey there! I am trapped in your device! help me experience the world by doing these quests~")
     console.log(questSelect())
@@ -12,31 +14,31 @@ const start = () => {
 
 const questSelect = () => {
     const selectedId = Math.floor(Math.random() * quests.length)
-    const selectedQuest = quests.find((q: { id: number; }) => q.id === selectedId)
+    selectedQuest = quests.find((q: { id: number; }) => q.id === selectedId)
 
     if (selectedQuest) {
-        return { selectedId, quest: selectedQuest.quest, followUps: selectedQuest.followUps }
+        return { id: selectedQuest.id , quest: selectedQuest.quest, followUps: selectedQuest.followUps }
     }
     
     acceptQuest(true)
 }
 
 const subQuestSelect0 = () => {
-    const parentQuest = questSelect()
-    const followUps = parentQuest?.followUps
+    if (!selectedQuest) return null
+    const followUps = selectedQuest.followUps
 
     const selectedSubQuest = followUps[0]
 
-    console.log ({ parentId: parentQuest?.selectedId, subQuest: selectedSubQuest})
+    console.log ({ parentId: selectedQuest.id, subQuest: selectedSubQuest})
 }
 
 const subQuestSelect1 = () => {
-    const parentQuest = questSelect()
-    const followUps = parentQuest?.followUps
+    if (!selectedQuest) return null
+    const followUps = selectedQuest.followUps
 
     const selectedSubQuest = followUps[1]
 
-    console.log ({ parentId: parentQuest?.selectedId, subQuest: selectedSubQuest})
+    console.log ({ parentId: selectedQuest.id, subQuest: selectedSubQuest})
 }
 
 const acceptQuest = (questAccepted: boolean) => {
@@ -60,7 +62,7 @@ const completeQuest = (questComplete: boolean) => {
     }
 }
 
-subQuestSelect1()
+start()
 
 
 
