@@ -43,15 +43,26 @@ const acceptQuest = (questAccepted: boolean) => {
 }
 
 const subQuestSelect = () => {
-    const selectedSubId = Math.random() * 10
-    const selectedSubQuest = quests.find((q: { id: number; }) => q.id === selectedSubId)
+    const followUps = quests.followUps
+    const selectedSubId = Math.random() * followUps.length()
+    const selectedSubQuest = followUps.find((q: { id: number; }) => q.id === selectedSubId)
+
+    if (selectedSubQuest) {
+        return { selectedSubId, quest: selectedSubQuest.quest }
+    }
 }
 
 const completeQuest = (questComplete: boolean) => {
-
+    if (questComplete == true) {
+        subQuestSelect()
+    }
+    else if (questComplete == false) {
+        console.log("Ok, I'll wait. Or did you want to start a brand new quest?")
+        questSelect()
+    }
 }
 
-start()
+subQuestSelect()
 
 
 
