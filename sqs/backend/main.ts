@@ -5,30 +5,38 @@ import path from "path";
 const questsPath = path.join(__dirname, "quests.json"); 
 const quests = JSON.parse(fs.readFileSync(questsPath, "utf-8"));
 
-
-type Quest = {
-    id: number,
-    quest: string,
-    followUps: {
-        id: string;
-        quest: string
-    } []
-}
-
 const start = () => {
     console.log("Hey there! I am trapped in your device! help me experience the world by doing these quests~")
     console.log(questSelect())
 }
 
 const questSelect = () => {
-    const selectedId = Math.floor(Math.random() * 10)
+    const selectedId = Math.floor(Math.random() * quests.length)
     const selectedQuest = quests.find((q: { id: number; }) => q.id === selectedId)
 
     if (selectedQuest) {
-        return { selectedId, quest: selectedQuest.quest }
+        return { selectedId, quest: selectedQuest.quest, followUps: selectedQuest.followUps }
     }
-
+    
     acceptQuest(true)
+}
+
+const subQuestSelect0 = () => {
+    const parentQuest = questSelect()
+    const followUps = parentQuest?.followUps
+
+    const selectedSubQuest = followUps[0]
+
+    console.log ({ parentId: parentQuest?.selectedId, subQuest: selectedSubQuest})
+}
+
+const subQuestSelect1 = () => {
+    const parentQuest = questSelect()
+    const followUps = parentQuest?.followUps
+
+    const selectedSubQuest = followUps[1]
+
+    console.log ({ parentId: parentQuest?.selectedId, subQuest: selectedSubQuest})
 }
 
 const acceptQuest = (questAccepted: boolean) => {
@@ -42,19 +50,9 @@ const acceptQuest = (questAccepted: boolean) => {
     }
 }
 
-const subQuestSelect = () => {
-    const followUps = quests.followUps
-    const selectedSubId = Math.random() * followUps.length()
-    const selectedSubQuest = followUps.find((q: { id: number; }) => q.id === selectedSubId)
-
-    if (selectedSubQuest) {
-        return { selectedSubId, quest: selectedSubQuest.quest }
-    }
-}
-
 const completeQuest = (questComplete: boolean) => {
     if (questComplete == true) {
-        subQuestSelect()
+        subQuestSelect0()
     }
     else if (questComplete == false) {
         console.log("Ok, I'll wait. Or did you want to start a brand new quest?")
@@ -62,7 +60,7 @@ const completeQuest = (questComplete: boolean) => {
     }
 }
 
-subQuestSelect()
+subQuestSelect1()
 
 
 
