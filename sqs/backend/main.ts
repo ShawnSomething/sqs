@@ -14,7 +14,8 @@ const start = () => {
 }
 
 const questSelect = async () => {
-    const selectedId = Math.floor(Math.random() * quests.length)
+    const ids = quests.map((q: { id: number; }) => q.id)
+    const selectedId = ids[Math.floor(Math.random() * ids.length)]
     selectedQuest = quests.find((q: { id: number; }) => q.id === selectedId)
 
     console.log ({ id: selectedQuest?.id , quest: selectedQuest?.quest})
@@ -28,30 +29,36 @@ const questSelect = async () => {
         },
     ])
 
-    await completeQuest(answer.choice)
+    await completeQuest(answer.choice, 0)
 }
 
-const subQuestSelect0 = () => {
+const subQuestSelect = async (index: number) => {
     if (!selectedQuest) return null
     const followUps = selectedQuest.followUps
+    const selectedSubQuest = followUps[index]
 
-    const selectedSubQuest = followUps[0]
-
-    console.log ({ parentId: selectedQuest.id, subQuest: selectedSubQuest})
-}
-
-const subQuestSelect1 = () => {
-    if (!selectedQuest) return null
-    const followUps = selectedQuest.followUps
-
-    const selectedSubQuest = followUps[1]
+    if (!selectedSubQuest) {
+        console.log ("All Quests Done! Thanks for helping me expeirence human life.")
+        return
+    }
 
     console.log ({ parentId: selectedQuest.id, subQuest: selectedSubQuest})
+
+    const answer = await inquirer.prompt([
+        {
+            type: "list",
+            name: "choice",
+            message: index === 0 ? "What's next?" : "I feel so alive!",
+            choices: ["Complete", "Reject"],
+        },
+    ])
+
+    await completeQuest(answer.choice, index + 1)
 }
 
-const completeQuest = (choice: string) => {
-    if (choice === "Complete") {
-        subQuestSelect0()
+const completeQuest = (choice: string, nextStep: number) => {
+    if (choice === "Complete")  {
+        subQuestSelect(nextStep)
     }
     else if (choice == "Reject") {
         console.log("Aw... Did you want to start a brand new quest?")
