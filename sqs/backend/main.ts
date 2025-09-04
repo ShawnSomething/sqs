@@ -8,12 +8,12 @@ const quests = JSON.parse(fs.readFileSync(questsPath, "utf-8"));
 
 let selectedQuest: { id: number; quest: string; followUps: any[] } | null = null;
 
-const start = () => {
+export const start = () => {
     console.log("Hey there! I am trapped in your device! help me experience the wonders of life by doing these quests~")
     console.log(questSelect())
 }
 
-const questSelect = async () => {
+export const questSelect = async () => {
     const ids = quests.map((q: { id: number; }) => q.id)
     const selectedId = ids[Math.floor(Math.random() * ids.length)]
     selectedQuest = quests.find((q: { id: number; }) => q.id === selectedId)
@@ -32,7 +32,7 @@ const questSelect = async () => {
     await completeQuest(answer.choice, 0)
 }
 
-const subQuestSelect = async (index: number) => {
+export const subQuestSelect = async (index: number) => {
     if (!selectedQuest) return null
     const followUps = selectedQuest.followUps
     const selectedSubQuest = followUps[index]
@@ -56,7 +56,7 @@ const subQuestSelect = async (index: number) => {
     await completeQuest(answer.choice, index + 1)
 }
 
-const completeQuest = (choice: string, nextStep: number) => {
+export const completeQuest = (choice: string, nextStep: number) => {
     if (choice === "Complete")  {
         subQuestSelect(nextStep)
     }
