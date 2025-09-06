@@ -4,50 +4,64 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .header h1{
   display: flex;
   justify-content: center;
-  margin-bottom: 20px
+  margin-bottom: 5px
 }
 
 .body {
-  width: 600px;
-  height: 400px;
+  width: 90%;
+  max-width: 600px;
+  aspect-ratio: 1 / 0.75;
   border: 2px solid black;
   border-radius: 15px;
-  margin: 20px auto; 
+  margin: 10px auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .guy {
-  width: 300px;
-  height: 200px;
+  width: 90%;
+  max-width: 300px;
+  aspect-ratio: 1 / 0.65;
   border: 2px solid black;
   border-radius: 15px;
-  margin-bottom: 20px;
-  margin: 20px auto; 
+  margin: 20px auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .buttons {
-  display: flex;
-  margin: 20px auto; 
-  gap: 20px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  gap: 5px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
 }
 
 .buttons button {
-  margin: 20px auto; 
   padding: 10px 20px;
   border: 2px solid black;
   border-radius: 10px;
   cursor: pointer;
-  width: 250px;
+  width: 45%;
+  max-width: 250px;
+  margin: 0 auto;
   height: 100px;
 }
 
