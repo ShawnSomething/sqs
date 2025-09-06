@@ -11,6 +11,19 @@ function App() {
       .catch(err => console.error("failed initial load", err))
   })
 
+  const handleChoice = (choice:string) => {
+    fetch("http://localhost:4000/choice", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({choice, questStep})
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.step) setQuestStep(data.step)
+      })
+      .catch(err => console.error("failed at choice call", err))
+  }
+
   return (
     <>
       <div className='header'>
@@ -19,8 +32,8 @@ function App() {
       <div className='body'>{questStep}</div>
       <div className='guy'></div>
       <div className="buttons">
-        <button className="buttons complete">Complete</button>
-        <button className="buttons reject">Reject</button>
+        <button className="buttons complete" onClick={() => handleChoice("complete")}>Complete</button>
+        <button className="buttons reject" onClick={() => handleChoice("reject")}>Reject</button>
       </div>
     </>
   );
