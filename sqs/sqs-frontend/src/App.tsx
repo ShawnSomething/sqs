@@ -7,6 +7,7 @@ function App() {
       <div className='header'>
         <h1>Side Quest Simulator</h1>
       </div>
+      <div className='border'></div>
     </>
   );
 }
