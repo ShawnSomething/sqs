@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import ghostIdle from './ghost.webm'
 import ghostSad from './ghostsad.webm'
 import ghostHappy from './ghosthappy.webm'
 
+const loopTime = 30000
+
 function App() {
   const [questStep, setQuestStep] = useState<any>(null);
   const [questStepIndex, setQuestStepIndex] = useState<number>(0);
+  const [currentGhost, setCurrentGhost] = useState(ghostIdle)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
     fetch("http://localhost:4000/start", { method: "POST" })
@@ -18,7 +22,24 @@ function App() {
       .catch(err => console.error("failed initial load", err));
   }, []);
 
+    useEffect(() => {
+      if (currentGhost === ghostIdle) return
+      const timer = setTimeout(() => setCurrentGhost(ghostIdle), loopTime)
+      return () => clearTimeout(timer)
+    }, [currentGhost])
+
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.src = currentGhost;
+        videoRef.current.load();
+        videoRef.current.play();
+      }
+    }, [currentGhost]);
+
   const handleChoice = (choice: string) => {
+    if (choice === "Reject") setCurrentGhost(ghostSad)
+    if (choice === "Complete") setCurrentGhost(ghostHappy)
+
     fetch("http://localhost:4000/choice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,15 +79,23 @@ function App() {
 
       <div className='guy'>
         <div className='animations'>
-          <video src={ghostIdle} autoPlay loop muted playsInline />
+          <video ref={videoRef} autoPlay loop muted playsInline />
         </div>
       </div>
 
       <div className="buttons">
-        <button className="buttons complete" onClick={() => handleChoice("Complete")}>
+        <button className="buttons complete" 
+        onClick={() => {
+          handleChoice("Complete") 
+          setCurrentGhost(ghostHappy)
+        }}>
           Complete
         </button>
-        <button className="buttons reject" onClick={() => handleChoice("Reject")}>
+        <button className="buttons reject" 
+        onClick={() => {
+          handleChoice("Reject")
+          setCurrentGhost(ghostSad)
+        }}>
           Reject
         </button>
       </div>
