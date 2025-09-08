@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import ghostIdle from './ghost.webm'
+import ghostSad from './ghostsad.webm'
+import ghostHappy from './ghosthappy.webm'
 
 function App() {
   const [questStep, setQuestStep] = useState<any>(null);
@@ -53,7 +56,11 @@ function App() {
 
       <div className='body'>{getStepText(questStep)}</div>
 
-      <div className='guy'></div>
+      <div className='guy'>
+        <div className='animations'>
+          <video src={ghostIdle} autoPlay loop muted playsInline />
+        </div>
+      </div>
 
       <div className="buttons">
         <button className="buttons complete" onClick={() => handleChoice("Complete")}>
