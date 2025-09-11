@@ -13,7 +13,7 @@ function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
-    fetch("http://localhost:4000/start", { method: "POST" })
+    fetch("http://13.239.247.89:3000/start", { method: "POST" })
       .then(res => res.json())
       .then(data => {
         setQuestStep(data.step);
@@ -40,7 +40,7 @@ function App() {
     if (choice === "Reject") setCurrentGhost(ghostSad)
     if (choice === "Complete") setCurrentGhost(ghostHappy)
 
-    fetch("http://localhost:4000/choice", {
+    fetch("http://13.239.247.89:3000/choice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ choice, questStepIndex })
