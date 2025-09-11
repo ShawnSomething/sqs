@@ -4,6 +4,8 @@ import ghostIdle from './ghost.webm'
 import ghostSad from './ghostsad.webm'
 import ghostHappy from './ghosthappy.webm'
 
+
+const API_URL = process.env.REACT_APP_API_URL
 const loopTime = 30000
 
 function App() {
@@ -13,7 +15,7 @@ function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
-    fetch("http://13.239.247.89:3000/start", { method: "POST" })
+    fetch(`${API_URL}/start`, { method: "POST" })
       .then(res => res.json())
       .then(data => {
         setQuestStep(data.step);
@@ -40,7 +42,7 @@ function App() {
     if (choice === "Reject") setCurrentGhost(ghostSad)
     if (choice === "Complete") setCurrentGhost(ghostHappy)
 
-    fetch("http://13.239.247.89:3000/choice", {
+    fetch(`${API_URL}/choice`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ choice, questStepIndex })
