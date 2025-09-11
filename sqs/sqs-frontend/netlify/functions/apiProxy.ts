@@ -1,19 +1,26 @@
 import fetch from "node-fetch";
 
 export async function handler(event, context) {
-  const { path, method, body } = event;
+  const path = event.path.replace("/.netlify/functions/proxy", ""); 
+  const { method, body } = event;
 
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL; 
   const targetUrl = `${apiUrl}${path}`;
 
   try {
     const response = await fetch(targetUrl, {
       method,
       headers: { "Content-Type": "application/json" },
-      body: body ? body : undefined,
+      body: body && body !== "" ? body : JSON.stringify({}),
     });
 
-    const data = await response.json();
+    const text = await response.text(); 
+    let data;
+    try {
+      data = JSON.parse(text); 
+    } catch {
+      data = { raw: text }; 
+    }
 
     return {
       statusCode: response.status,

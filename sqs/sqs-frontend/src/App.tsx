@@ -1,38 +1,108 @@
-import fetch from "node-fetch";
+import React, { useState, useEffect, useRef } from 'react';
+import './App.css';
+import ghostIdle from './ghost.webm'
+import ghostSad from './ghostsad.webm'
+import ghostHappy from './ghosthappy.webm'
 
-export async function handler(event: { path?: any; method?: any; body?: any; }, context: any) {
-  const path = event.path.replace("/.netlify/functions/proxy", "");
-  const { method, body } = event;
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-  const targetUrl = `${apiUrl}${path}`;
+const API_URL = process.env.REACT_APP_API_URL
+const loopTime = 30000
 
-  try {
-    const response = await fetch(targetUrl, {
-      method,
+function App() {
+  const [questStep, setQuestStep] = useState<any>(null);
+  const [questStepIndex, setQuestStepIndex] = useState<number>(0);
+  const [currentGhost, setCurrentGhost] = useState(ghostIdle)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  useEffect(() => {
+    fetch(`/.netlify/functions/proxy/start`, { method: "POST" })
+      .then(res => res.json())
+      .then(data => {
+        setQuestStep(data.step);
+        setQuestStepIndex(0);
+      })
+      .catch(err => console.error("failed initial load", err));
+  }, []);
+
+    useEffect(() => {
+      if (currentGhost === ghostIdle) return
+      const timer = setTimeout(() => setCurrentGhost(ghostIdle), loopTime)
+      return () => clearTimeout(timer)
+    }, [currentGhost])
+
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.src = currentGhost;
+        videoRef.current.load();
+        videoRef.current.play();
+      }
+    }, [currentGhost]);
+
+  const handleChoice = (choice: string) => {
+    if (choice === "Reject") setCurrentGhost(ghostSad)
+    if (choice === "Complete") setCurrentGhost(ghostHappy)
+
+    fetch(`/.netlify/functions/proxy/choice`, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: body && body !== "" ? body : JSON.stringify({}),
-    });
+      body: JSON.stringify({ choice, questStepIndex })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.step) {
+          if (data.step.done) {
+            setQuestStep({ quest: data.step.message });
+            setQuestStepIndex(0);
+          } else {
+            setQuestStep(data.step);
+            if (data.step.subQuest) setQuestStepIndex(prev => prev + 1);
+            else setQuestStepIndex(0);
+          }
+        }
+      })
+      .catch(err => console.error("failed at choice call", err));
+  };
 
-    const text = await response.text();
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      data = { raw: text };
-    }
+  const getStepText = (step: any) => {
+    if (!step) return "Loading...";
+    if (step.quest) return step.quest;
+    if (step.subQuest?.quest) return step.subQuest.quest;
+    return JSON.stringify(step);
+  };
 
-    return {
-      statusCode: response.status,
-      body: JSON.stringify(data),
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ 
-        error: "Proxy failed", 
-        details: err instanceof Error ? err.message : String(err) 
-      }),
-    };
-  }
+  return (
+    <>
+      <div className='header'>
+        <h1>Side Quest Simulator</h1>
+        <p className='para'>I am trapped in your device! help me experience the wonders of life by doing these quests~</p>
+      </div>
+
+      <div className='body'>{getStepText(questStep)}</div>
+
+      <div className='guy'>
+        <div className='animations'>
+          <video ref={videoRef} autoPlay loop muted playsInline />
+        </div>
+      </div>
+
+      <div className="buttons">
+        <button className="buttons complete" 
+        onClick={() => {
+          handleChoice("Complete") 
+          setCurrentGhost(ghostHappy)
+        }}>
+          Complete
+        </button>
+        <button className="buttons reject" 
+        onClick={() => {
+          handleChoice("Reject")
+          setCurrentGhost(ghostSad)
+        }}>
+          Reject
+        </button>
+      </div>
+    </>
+  );
 }
+
+export default App;
