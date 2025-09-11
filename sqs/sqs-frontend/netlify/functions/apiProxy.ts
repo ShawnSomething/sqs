@@ -1,10 +1,11 @@
 import fetch from "node-fetch";
 
 export async function handler(event, context) {
-  const path = event.path.replace("/.netlify/functions/proxy", ""); 
+  console.log("Netlify Function Event:", event);
+  const path = event.path.replace("/.netlify/functions/proxy", "");
   const { method, body } = event;
 
-  const apiUrl = process.env.REACT_APP_API_URL; 
+  const apiUrl = process.env.REACT_APP_API_URL;
   const targetUrl = `${apiUrl}${path}`;
 
   try {
@@ -14,12 +15,12 @@ export async function handler(event, context) {
       body: body && body !== "" ? body : JSON.stringify({}),
     });
 
-    const text = await response.text(); 
+    const text = await response.text();
     let data;
     try {
-      data = JSON.parse(text); 
+      data = JSON.parse(text);
     } catch {
-      data = { raw: text }; 
+      data = { raw: text };
     }
 
     return {
