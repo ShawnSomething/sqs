@@ -5,7 +5,7 @@ import ghostSad from './ghostsad.webm'
 import ghostHappy from './ghosthappy.webm'
 
 
-const API_URL = "/api"
+const API_URL = process.env.REACT_APP_API_URL
 const loopTime = 30000
 
 function App() {
