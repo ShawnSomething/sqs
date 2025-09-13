@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/api/*"
+  to = "http://$BACKEND_IP:4000/:splat"
+  status = 200
